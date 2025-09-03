@@ -66,5 +66,20 @@ pdfRouter.get("/download/:id", userAuth, async (req, res) => {
 });
 
 
+// Get all signed documents for the logged-in notary
+pdfRouter.get("/documents", userAuth, async (req, res) => {
+  try {
+    const docs = await SignedDocument.find({ notaryId: req.user._id })
+      .select("fileName hash createdAt") // only return relevant fields
+      .sort({ createdAt: -1 });
+
+    res.json(docs);
+  } catch (err) {
+    res.status(500).send("Error fetching documents: " + err.message);
+  }
+});
+
+
+
 
 module.exports = pdfRouter;
