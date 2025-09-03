@@ -93,7 +93,7 @@ authRouter.post("/logout", async (req, res) => {
    res.cookie("token", "", {
     httpOnly: true,
     expires: new Date(0),
-    sameSite: "None",  //  Must match how it was set
+    sameSite: "None",  
     secure: true
   });
 
