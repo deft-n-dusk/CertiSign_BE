@@ -72,7 +72,7 @@ authRouter.post("/login", async (req, res) => {
 
      res.send({
         message: "Login successful",
-        token, // ✅ Send token to frontend
+        token, //  Send token to frontend
         user: {
           _id: user._id,
           firstName: user.firstName,
@@ -93,7 +93,7 @@ authRouter.post("/logout", async (req, res) => {
    res.cookie("token", "", {
     httpOnly: true,
     expires: new Date(0),
-    sameSite: "None",  // ✅ Must match how it was set
+    sameSite: "None",  //  Must match how it was set
     secure: true
   });
 
