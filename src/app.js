@@ -9,7 +9,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173", // local dev
-    //   "https://certi-sign-ui.vercel.app" // deployed frontend
+      "https://certi-sign-fe.vercel.app/" // deployed frontend
     ],
     credentials: true,
   })

@@ -30,10 +30,10 @@ authRouter.post("/signup", async (req, res) => {
 
              //Add the token to the cookie and send the response back to the user
             res.cookie("token", token, {
-                httpOnly: true,
-                secure: false,   // ❌ don't force HTTPS locally
-                sameSite: "Lax", // ✅ works fine for localhost
-                expires: new Date(Date.now() + 8 * 3600000),
+              httpOnly: true,
+              secure: true,
+              sameSite: "None",
+              expires: new Date(Date.now() + 8 * 3600000),
             });
 
 
@@ -61,16 +61,16 @@ authRouter.post("/login", async (req, res) => {
     if (isPasswordValid) {
       const token = await user.getJWT();
 
-     res.cookie("token", token, {
-        httpOnly: true,
-        secure: false,   // ❌ don't force HTTPS locally
-        sameSite: "Lax", // ✅ works fine for localhost
-        expires: new Date(Date.now() + 8 * 3600000),
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "None",
+      expires: new Date(Date.now() + 8 * 3600000),
     });
 
 
 
-      res.send({
+     res.send({
         message: "Login successful",
         token, // ✅ Send token to frontend
         user: {
@@ -91,11 +91,11 @@ authRouter.post("/login", async (req, res) => {
 //Logout API
 authRouter.post("/logout", async (req, res) => {
    res.cookie("token", "", {
-        httpOnly: true,
-        secure: false,
-        sameSite: "Lax",
-        expires: new Date(0),
-    });
+    httpOnly: true,
+    expires: new Date(0),
+    sameSite: "None",  // ✅ Must match how it was set
+    secure: true
+  });
 
     res.send("Logout successful!!");
 })
